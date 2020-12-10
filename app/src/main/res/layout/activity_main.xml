@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/video_example_container"
+        android:layout_width="match_parent"
+        android:layout_height="235dp"
+        >
+
+
+    </FrameLayout>
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        style="?android:attr/progressBarStyle"-->
+<!--        android:indeterminateDrawable="@drawable/circular_progress"-->
+<!--        android:indeterminateDuration="@android:integer/config_longAnimTime"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:visibility="visible"-->
+<!--        android:layout_gravity="center_horizontal|center_vertical"/>-->
+</LinearLayout>
