@@ -48,7 +48,7 @@ public class SampleVideoPlayer extends VideoView implements VideoPlayer {
 
 
     MediaPlayer mediaPlayer1 ;
-    static boolean mute = true ;
+    static boolean mute = false ;
     public void muteVolume (boolean mute) {
         if (mute) {
             this.mute = mute ;

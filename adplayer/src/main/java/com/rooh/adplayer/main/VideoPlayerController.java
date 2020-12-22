@@ -57,6 +57,7 @@ public class VideoPlayerController {
 
     public AdsControllerCallback adsControllerCallback ;
 
+    public Boolean isVideoVolumeControlEnabled = false ;
 
     public Context context;
 
@@ -68,11 +69,14 @@ public class VideoPlayerController {
             String language,
             ViewGroup companionViewGroup,
             Logger log ,
-            boolean loopAd
+            boolean loopAd ,
+            boolean isVideoVolumeControlEnabled
+
     ) {
 
         this.context = context ;
         this.loopAd = loopAd ;
+        this.isVideoVolumeControlEnabled = isVideoVolumeControlEnabled ;
 
         this.videoPlayerWithAdPlayback = videoPlayerWithAdPlayback;
         this.playPauseToggle = playPauseToggle;
@@ -172,6 +176,9 @@ public class VideoPlayerController {
 
 
                                 case AD_BUFFERING:
+
+                                    videoPlayerWithAdPlayback.showProgress();
+
                                     videoPlayerWithAdPlayback.resumeContentAfterAdPlayback();
                                     if (adsControllerCallback != null ) {
                                         adsControllerCallback.onAdsBuffering();
@@ -182,6 +189,9 @@ public class VideoPlayerController {
                                     // played. AdsManager.start() begins ad playback. This method is
                                     // ignored for VMAP or ad rules playlists, as the SDK will
                                     // automatically start executing the playlist.
+
+                                    videoPlayerWithAdPlayback.showProgress();
+
                                     adsManager.start();
 
                                     if (adsControllerCallback != null ) {
@@ -190,10 +200,22 @@ public class VideoPlayerController {
 
 
                                     break;
+                                case STARTED:
+
+                                    if (isVideoVolumeControlEnabled) {
+                                        videoPlayerWithAdPlayback.volumeButton.setVisibility(View.VISIBLE);
+                                        videoPlayerWithAdPlayback.muteVideo();
+                                    }
+
+
+                                    videoPlayerWithAdPlayback.hideProgress();
+
+                                    break ;
+
                                 case CONTENT_PAUSE_REQUESTED:
                                     // AdEventType.CONTENT_PAUSE_REQUESTED is fired immediately before
                                     // a video ad is played.
-                                    videoPlayerWithAdPlayback.hideProgress();
+
                                     pauseContent();
                                     if (adsControllerCallback != null ) {
                                         adsControllerCallback.onVideoContentPauseRequested();
@@ -203,7 +225,7 @@ public class VideoPlayerController {
                                     // AdEventType.CONTENT_RESUME_REQUESTED is fired when the ad is
                                     // completed and you should start playing your content.
 //                                        resumeContent();
-                                    videoPlayerWithAdPlayback.showProgress();
+
                                     if (loopAd) {
                                         requestAndPlayAds(-1);
                                     }
@@ -220,6 +242,14 @@ public class VideoPlayerController {
                                     }
                                     break;
                                 case RESUMED:
+
+                                    if (isVideoVolumeControlEnabled) {
+                                        videoPlayerWithAdPlayback.volumeButton.setVisibility(View.VISIBLE);
+//                                        videoPlayerWithAdPlayback.muteVideo();
+                                    }
+
+                                    videoPlayerWithAdPlayback.hideProgress();
+
                                     isAdPlaying = true;
                                     videoPlayerWithAdPlayback.disableControls();
                                     if (adsControllerCallback != null ) {

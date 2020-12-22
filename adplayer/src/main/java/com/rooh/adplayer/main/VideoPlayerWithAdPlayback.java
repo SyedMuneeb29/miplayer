@@ -71,6 +71,13 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
 
     boolean isMute = true ;
     int currentVolume = 0 ;
+
+    public void muteVideo () {
+        volumeButton.setBackground(getResources().getDrawable(R.drawable.volume_mute_foreground));
+        videoPlayer.muteVolume(true);
+        isMute = !isMute ;
+    }
+
     private void onVolumeClick () {
 
         if (isMute) {
@@ -119,6 +126,8 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
         uiLayout.addRule(RelativeLayout.CENTER_VERTICAL);
         adUiContainer.setLayoutParams(uiLayout);
 
+
+
         volumeButton = new Button(getContext()) ;
         volumeButton.setBackgroundResource(R.drawable.volume_mute_foreground);
         volumeButton.setOnClickListener(new OnClickListener() {
@@ -127,6 +136,9 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
                   onVolumeClick() ;
             }
         });
+        volumeButton.setVisibility(GONE);
+
+
         RelativeLayout.LayoutParams buttonLayout = new RelativeLayout.LayoutParams(
                 120 ,
                 120
@@ -136,7 +148,7 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
         volumeButton.setLayoutParams(buttonLayout);
 
         progressBar = new ProgressBar(getContext()) ;
-        progressBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.circular_progress));
+        progressBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.circular_progress2));
         progressBar.setVisibility(GONE);
 
 

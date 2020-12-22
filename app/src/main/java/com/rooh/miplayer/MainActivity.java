@@ -3,6 +3,7 @@ package com.rooh.miplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         videoFragment = new VideoFragment();
         videoFragment.loopAd = false ;
+        videoFragment.isVideoVolumeControlEnabled = false ;
         videoFragment.adsControllerCallback = new AdsControllerCallback() {
             @Override
             public void onAdsBuffering() {
@@ -110,18 +112,25 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                videoFragment.initiateAd("https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/Bestsongs.pk&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=");
+            }
+        }, 500);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        videoFragment.initiateAd("https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/Bestsongs.pk&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=");
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        container.setVisibility(View.VISIBLE);
-        videoFragment.initiateAd("https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/Bestsongs.pk&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=");
+//        container.setVisibility(View.VISIBLE);
+
     }
 }

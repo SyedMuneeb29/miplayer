@@ -16,12 +16,14 @@ import androidx.fragment.app.Fragment;
 public class VideoFragment extends Fragment {
 
     private VideoPlayerController videoPlayerController;
+    public Boolean isVideoVolumeControlEnabled = false ;
     private VideoItem videoItem;
     private TextView videoTitle;
     private ScrollView videoExampleLayout;
     private OnVideoFragmentViewCreatedListener viewCreatedCallback;
 
     public AdsControllerCallback adsControllerCallback ;
+
 
     public VideoPlayerWithAdPlayback videoPlayerWithAdPlayback ;
     public ViewGroup companionAdSlot ;
@@ -109,7 +111,6 @@ public class VideoFragment extends Fragment {
         final TextView logText = new TextView(getContext()) ; //rootView.findViewById(R.id.logText);
 
 
-
         // Provide an implementation of a logger so we can output SDK events to the UI.
         VideoPlayerController.Logger logger =
                 new VideoPlayerController.Logger() {
@@ -130,7 +131,8 @@ public class VideoFragment extends Fragment {
                         "en",
                         companionAdSlot,
                         logger ,
-                        loopAd
+                        loopAd ,
+                        isVideoVolumeControlEnabled
                 );
 
         setupVideoControllerWith(adTag);
@@ -146,7 +148,7 @@ public class VideoFragment extends Fragment {
         this.videoItem = new VideoItem(
                 "https://storage.googleapis.com/gvabox/media/samples/stock.html" ,
                 "",
-                adTag ,
+                 adTag ,
                 0 ,
                 false
 
