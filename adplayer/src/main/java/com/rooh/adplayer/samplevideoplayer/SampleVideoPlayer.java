@@ -3,6 +3,7 @@ package com.rooh.adplayer.samplevideoplayer;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
@@ -61,10 +62,17 @@ public class SampleVideoPlayer extends VideoView implements VideoPlayer {
 
     private void init() {
         playbackState = PlaybackState.STOPPED;
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
+        }
         mediaController = new MediaController(getContext());
         mediaController.setAnchorView(this);
 //    setMediaController(mediaController);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
+        }
+
         mediaController.hide();
 
 

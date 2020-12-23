@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 /** The main fragment for displaying video content. */
 public class VideoFragment extends Fragment {
 
-    private VideoPlayerController videoPlayerController;
+    public VideoPlayerController videoPlayerController;
     public Boolean isVideoVolumeControlEnabled = false ;
     private VideoItem videoItem;
     private TextView videoTitle;

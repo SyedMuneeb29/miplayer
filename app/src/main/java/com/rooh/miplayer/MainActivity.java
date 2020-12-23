@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -132,5 +133,22 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 //        container.setVisibility(View.VISIBLE);
 
+
+
     }
+
+    @Override
+    protected void onStop() {
+        videoFragment.videoPlayerController.destroyAdsManger();
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        videoFragment.videoPlayerController.destroyAdsManger();
+        super.onPause();
+
+    }
+
+
 }

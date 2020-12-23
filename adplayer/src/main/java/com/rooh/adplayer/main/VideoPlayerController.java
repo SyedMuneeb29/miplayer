@@ -1,6 +1,7 @@
 package com.rooh.adplayer.main;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +115,10 @@ public class VideoPlayerController {
     /** Request and subsequently play video ads from the ad server. */
     public void requestAndPlayAds(double playAdsAfterTime) {
 
+
+
         videoPlayerWithAdPlayback.showProgress();
+
 
 
         if (currentAdTagUrl == null || currentAdTagUrl == "") {
@@ -140,7 +144,24 @@ public class VideoPlayerController {
         adsLoader.requestAds(request);
     }
 
+    public void destroyAdsManger () {
+        if (adsManager != null) {
+            adsManager.destroy();
+            adsManager = null;
+        }
+    }
 
+    public void pauseAdsManager () {
+        if (adsManager != null) {
+            adsManager.pause();
+        }
+    }
+
+    public void resumeAdsManager () {
+        if (adsManager != null) {
+            adsManager.resume();
+        }
+    }
 
     // Inner class implementation of AdsLoader.AdsLoaderListener.
     private class AdsLoadedListener implements AdsLoader.AdsLoadedListener {
@@ -205,8 +226,12 @@ public class VideoPlayerController {
                                     if (isVideoVolumeControlEnabled) {
                                         videoPlayerWithAdPlayback.volumeButton.setVisibility(View.VISIBLE);
                                         videoPlayerWithAdPlayback.muteVideo();
+                                    }else {
+                                        videoPlayerWithAdPlayback.unMuteVideo();
                                     }
 
+                                    AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                                    am.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
                                     videoPlayerWithAdPlayback.hideProgress();
 
@@ -215,6 +240,7 @@ public class VideoPlayerController {
                                 case CONTENT_PAUSE_REQUESTED:
                                     // AdEventType.CONTENT_PAUSE_REQUESTED is fired immediately before
                                     // a video ad is played.
+
 
                                     pauseContent();
                                     if (adsControllerCallback != null ) {
@@ -246,6 +272,8 @@ public class VideoPlayerController {
                                     if (isVideoVolumeControlEnabled) {
                                         videoPlayerWithAdPlayback.volumeButton.setVisibility(View.VISIBLE);
 //                                        videoPlayerWithAdPlayback.muteVideo();
+                                    }else {
+                                        videoPlayerWithAdPlayback.unMuteVideo();
                                     }
 
                                     videoPlayerWithAdPlayback.hideProgress();
@@ -257,10 +285,11 @@ public class VideoPlayerController {
                                     }
                                     break;
                                 case ALL_ADS_COMPLETED:
-                                    if (adsManager != null) {
-                                        adsManager.destroy();
-                                        adsManager = null;
-                                    }
+//                                    if (adsManager != null) {
+//                                        adsManager.destroy();
+//                                        adsManager = null;
+//                                    }
+                                    destroyAdsManger();
                                     if (adsControllerCallback != null ) {
                                         adsControllerCallback.onAdsCompleted();
                                     }
@@ -280,6 +309,7 @@ public class VideoPlayerController {
 
             List<String> mimeTypes = new ArrayList<String>();
             mimeTypes.add("application/x-mpegURL") ;
+            mimeTypes.add("video/mp4") ;
 
             adsRenderingSettings.setMimeTypes(mimeTypes);
 //

@@ -75,7 +75,12 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
     public void muteVideo () {
         volumeButton.setBackground(getResources().getDrawable(R.drawable.volume_mute_foreground));
         videoPlayer.muteVolume(true);
-        isMute = !isMute ;
+        isMute = true ;
+    }
+    public void unMuteVideo () {
+        volumeButton.setBackground(getResources().getDrawable(R.drawable.volume_mute_foreground));
+        videoPlayer.muteVolume(false);
+        isMute = false ;
     }
 
     private void onVolumeClick () {
