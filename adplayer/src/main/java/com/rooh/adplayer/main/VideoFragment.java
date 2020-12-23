@@ -2,6 +2,7 @@ package com.rooh.adplayer.main;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class VideoFragment extends Fragment {
 
     public AdsControllerCallback adsControllerCallback ;
 
+    public boolean freshAd = false ;
 
     public VideoPlayerWithAdPlayback videoPlayerWithAdPlayback ;
     public ViewGroup companionAdSlot ;
@@ -50,22 +52,26 @@ public class VideoFragment extends Fragment {
     ) {
 
         rootView = new RelativeLayout(getContext()) ;
-
         RelativeLayout.LayoutParams rootLayoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT ,
                 RelativeLayout.LayoutParams.MATCH_PARENT
         ) ;
-
         rootView.setLayoutParams(rootLayoutParams);
 
         videoPlayerWithAdPlayback = new VideoPlayerWithAdPlayback(getContext()) ;
-
         RelativeLayout.LayoutParams videoPlayerLayoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT ,
                 RelativeLayout.LayoutParams.MATCH_PARENT
         ) ;
-
         videoPlayerWithAdPlayback.setLayoutParams(videoPlayerLayoutParams);
+
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
+        videoPlayerWithAdPlayback.setupProgressAndMuteWidthAndHeight(width , height);
 
         rootView.addView(videoPlayerWithAdPlayback);
 
@@ -77,6 +83,7 @@ public class VideoFragment extends Fragment {
 //      }
 
 
+
         return rootView;
     }
 
@@ -84,6 +91,7 @@ public class VideoFragment extends Fragment {
         String adTag = withAdTag ;
         setupVideoScreenView(rootView , adTag);
     }
+
 
     private void setupVideoScreenView(View rootView , String adTag) {
 //    VideoPlayerWithAdPlayback videoPlayerWithAdPlayback =
@@ -200,18 +208,34 @@ public class VideoFragment extends Fragment {
 
     // LIFE CYCLE :
 
+    boolean tbd = false ;
     @Override
     public void onPause() {
+        tbd = true ;
         if (videoPlayerController != null) {
-            videoPlayerController.pause();
+            videoPlayerController.destroy();
+//            videoPlayerController.pause();
         }
         super.onPause();
     }
 
+
+
     @Override
     public void onResume() {
+////        loadAd();
+//        if (tbd){
+//            reques
+//        }
+
+        if (freshAd) {
+            initiateAd("https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/Bestsongs.pk&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=");
+            freshAd = false ;
+        }
+
         if (videoPlayerController != null) {
-            videoPlayerController.resume();
+//            videoPlayerController.destroy();
+//            videoPlayerController.resume();
         }
         super.onResume();
     }

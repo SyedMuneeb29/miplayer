@@ -145,10 +145,7 @@ public class VideoPlayerController {
     }
 
     public void destroyAdsManger () {
-        if (adsManager != null) {
-            adsManager.destroy();
-            adsManager = null;
-        }
+        destroy() ;
     }
 
     public void pauseAdsManager () {
@@ -194,7 +191,6 @@ public class VideoPlayerController {
                             // These are the suggested event types to handle. For full list of all ad
                             // event types, see the documentation for AdEvent.AdEventType.
                             switch (adEvent.getType()) {
-
 
                                 case AD_BUFFERING:
 
@@ -290,6 +286,7 @@ public class VideoPlayerController {
 //                                        adsManager = null;
 //                                    }
                                     destroyAdsManger();
+
                                     if (adsControllerCallback != null ) {
                                         adsControllerCallback.onAdsCompleted();
                                     }

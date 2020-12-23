@@ -104,6 +104,30 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
         progressBar.setVisibility(VISIBLE);
     }
 
+    public void setupProgressAndMuteWidthAndHeight (int width , int height ) {
+
+        RelativeLayout.LayoutParams buttonLayout = new RelativeLayout.LayoutParams(
+                width / 9 ,
+                width / 9
+        ) ;
+        buttonLayout.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        buttonLayout.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        volumeButton.setLayoutParams(buttonLayout);
+
+
+        RelativeLayout.LayoutParams progressLayout = new RelativeLayout.LayoutParams(
+                width / 9  ,
+                height / 9
+        ) ;
+        progressLayout.addRule(RelativeLayout.CENTER_VERTICAL);
+        progressLayout.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+        progressBar.setLayoutParams(progressLayout);
+
+
+    }
+
+
     public void hideProgress () {
         progressBar.setVisibility(GONE);
     }
@@ -178,6 +202,8 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
         addView(adUiContainer);
         addView(volumeButton);
         addView(progressBar);
+
+
 
 //        videoPlayer = (VideoPlayer) this.getRootView().findViewById(R.id.videoPlayer);
 //        adUiContainer = (ViewGroup) this.getRootView().findViewById(R.id.adUiContainer);
