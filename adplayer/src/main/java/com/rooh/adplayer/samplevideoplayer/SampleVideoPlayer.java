@@ -69,9 +69,9 @@ public class SampleVideoPlayer extends VideoView implements VideoPlayer {
         mediaController.setAnchorView(this);
 //    setMediaController(mediaController);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
+//        }
 
         mediaController.hide();
 

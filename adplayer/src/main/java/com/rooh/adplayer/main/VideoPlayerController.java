@@ -225,9 +225,9 @@ public class VideoPlayerController {
                                     }else {
                                         videoPlayerWithAdPlayback.unMuteVideo();
                                     }
-
-                                    AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-                                    am.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+//
+//                                    AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+//                                    am.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
                                     videoPlayerWithAdPlayback.hideProgress();
 
