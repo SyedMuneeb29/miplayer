@@ -116,8 +116,8 @@ class VideoPlayerWithAdPlayback extends RelativeLayout {
 
 
         RelativeLayout.LayoutParams progressLayout = new RelativeLayout.LayoutParams(
-                width / 9  ,
-                height / 9
+                width / 7  ,
+                height / 7
         ) ;
         progressLayout.addRule(RelativeLayout.CENTER_VERTICAL);
         progressLayout.addRule(RelativeLayout.CENTER_HORIZONTAL);
