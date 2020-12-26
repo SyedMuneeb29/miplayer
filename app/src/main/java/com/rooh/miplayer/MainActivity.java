@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         container.setVisibility(View.VISIBLE);
         videoFragment = new VideoFragment();
         videoFragment.freshAd = true ;
+        videoFragment.adTag = "https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/11223344&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=" ;
         videoFragment.loopAd = false ;
         videoFragment.isVideoVolumeControlEnabled = true ;
         getSupportFragmentManager()
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             freshSetupAd();
             completed = false ;
         } else {
-            videoFragment.initiateAd("https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/Bestsongs.pk&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=");
+            videoFragment.initiateAd("https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/11223344&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator="); // https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/11223344&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=
         }
 
     }

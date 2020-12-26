@@ -26,6 +26,7 @@ public class VideoFragment extends Fragment {
     public AdsControllerCallback adsControllerCallback ;
 
     public boolean freshAd = false ;
+    public String adTag = ""  ;
 
     public VideoPlayerWithAdPlayback videoPlayerWithAdPlayback ;
     public ViewGroup companionAdSlot ;
@@ -87,7 +88,7 @@ public class VideoFragment extends Fragment {
         return rootView;
     }
 
-    public void initiateAd (String withAdTag ) {
+    public void initiateAd ( String withAdTag ) {
         String adTag = withAdTag ;
         setupVideoScreenView(rootView , adTag);
     }
@@ -229,7 +230,7 @@ public class VideoFragment extends Fragment {
 //        }
 
         if (freshAd) {
-            initiateAd("https://pubads.g.doubleclick.net/gampad/ads?iu=/21792359936/Bestsongs.pk&description_url=[placeholder]&tfcd=0&npa=0&sz=640x480&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=");
+            initiateAd(adTag);
             freshAd = false ;
         }
 
