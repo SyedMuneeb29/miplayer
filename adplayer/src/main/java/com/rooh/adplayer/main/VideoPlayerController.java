@@ -265,20 +265,24 @@ public class VideoPlayerController {
                                     break;
                                 case RESUMED:
 
-                                    if (isVideoVolumeControlEnabled) {
-                                        videoPlayerWithAdPlayback.volumeButton.setVisibility(View.VISIBLE);
+                                    if (videoPlayerWithAdPlayback != null) {
+                                        if (isVideoVolumeControlEnabled) {
+                                            videoPlayerWithAdPlayback.volumeButton.setVisibility(View.VISIBLE);
 //                                        videoPlayerWithAdPlayback.muteVideo();
-                                    }else {
-                                        videoPlayerWithAdPlayback.unMuteVideo();
+                                        }else {
+                                            videoPlayerWithAdPlayback.unMuteVideo();
+                                        }
+
+                                        videoPlayerWithAdPlayback.hideProgress();
+
+                                        isAdPlaying = true;
+                                        videoPlayerWithAdPlayback.disableControls();
+                                        if (adsControllerCallback != null ) {
+                                            adsControllerCallback.onAdsResumed();
+                                        }
                                     }
 
-                                    videoPlayerWithAdPlayback.hideProgress();
 
-                                    isAdPlaying = true;
-                                    videoPlayerWithAdPlayback.disableControls();
-                                    if (adsControllerCallback != null ) {
-                                        adsControllerCallback.onAdsResumed();
-                                    }
                                     break;
                                 case ALL_ADS_COMPLETED:
 //                                    if (adsManager != null) {

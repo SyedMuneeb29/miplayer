@@ -56,7 +56,10 @@ public class SampleVideoPlayer extends VideoView implements VideoPlayer {
             mediaPlayer1.setVolume(0f , 0f);
         } else {
             this.mute = false ;
-            mediaPlayer1.setVolume(1f , 1f);
+            if (mediaPlayer1 != null) {
+                mediaPlayer1.setVolume(1f , 1f);
+            }
+
         }
     }
 
